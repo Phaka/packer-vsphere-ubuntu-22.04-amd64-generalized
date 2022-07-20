@@ -23,7 +23,7 @@ autoinstall:
     - open-vm-tools
     - openssh-server
   identity:
-    hostname: ubuntu
+    hostname: ${ hostname }
     username: ${ ssh_username }
     password: ${ ssh_password_hashed }
   ssh:
