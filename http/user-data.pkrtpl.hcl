@@ -24,8 +24,8 @@ autoinstall:
     - openssh-server
   identity:
     hostname: ubuntu
-    username: ubuntu
-    password: $6$rounds=4096$lrt81Kp8C7xX9A$.W4b0ZI5bAX27meBpFqeCr5zzIO64xpmlhpJLUWpfzmiDIG4EUJSrXGtkKl2lA14PqPtXWo6.7CuzA2vnAUns1
+    username: ${ ssh_username }
+    password: ${ ssh_password_hashed }
   ssh:
     install-server: yes
     allow-pw: yes
@@ -37,5 +37,5 @@ autoinstall:
     package_reboot_if_required: false
     disable_root: false
   late-commands:
-    - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
-    - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/ubuntu
+    - echo '${ ssh_username } ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/${ ssh_username }
+    - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/${ ssh_username }
