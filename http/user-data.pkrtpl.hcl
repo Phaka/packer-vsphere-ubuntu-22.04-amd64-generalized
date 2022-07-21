@@ -24,8 +24,6 @@ autoinstall:
     - openssh-server
   identity:
     hostname: ${ hostname }
-    username: ${ ssh_username }
-    password: ${ ssh_password_hashed }
   ssh:
     install-server: yes
     allow-pw: yes
@@ -36,6 +34,10 @@ autoinstall:
     package_upgrade: false
     package_reboot_if_required: false
     disable_root: false
-  late-commands:
-    - echo '${ ssh_username } ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/${ ssh_username }
-    - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/${ ssh_username }
+    users:
+    - name:  ${ ssh_username }
+      passwd: ${ ssh_password_hashed }
+      lock-passwd: false
+      sudo: ALL=(ALL) NOPASSWD:ALL
+      shell: /bin/bash
+
