@@ -19,8 +19,8 @@ source "vsphere-iso" "main" {
 
    
   http_content        = {
-    "/user-data" = templatefile(
-      "${path.root}/http/user-data.pkrtpl.hcl", {
+    "/meta-data" = templatefile(
+      "${path.root}/http/meta-data.pkrtpl.hcl", {
         ssh_username = var.ssh_username,
         ssh_password = var.ssh_password,
         ssh_password_hashed = var.ssh_password_hashed,
@@ -29,8 +29,8 @@ source "vsphere-iso" "main" {
         packer_password_hashed = var.packer_password_hashed,
         hostname = var.hostname,
     })
-    "/meta-data" = templatefile(
-      "${path.root}/http/meta-data.pkrtpl.hcl", {
+    "/user-data" = templatefile(
+      "${path.root}/http/user-data.pkrtpl.hcl", {
         ssh_username = var.ssh_username,
         ssh_password = var.ssh_password,
         ssh_password_hashed = var.ssh_password_hashed,
