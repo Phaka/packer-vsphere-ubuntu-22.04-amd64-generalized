@@ -66,7 +66,7 @@ variable "vsphere_datastore" {
 
 variable "iso_path_prefix" {
   type = string
-  default = "[mirrors] ubuntu/"
+  default = "[isos] bla.iso/"
 }
 
 variable "iso_path" {
